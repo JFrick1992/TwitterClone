@@ -47,6 +47,9 @@ class TimelineViewController: UIViewController, UITableViewDataSource {
         return tweets.count
     }
     
+    @IBAction func didTapLogOut(_ sender: Any) {
+        APIManager.shared.logout()
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         if tweets.count > 0 {
