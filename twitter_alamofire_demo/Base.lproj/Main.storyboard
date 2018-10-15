@@ -93,14 +93,14 @@
                                                 <constraint firstAttribute="width" constant="15" id="xdb-g9-ILl"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="skjdksjkdsj" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S4g-60-JtE">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="skjdksjkdsj" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S4g-60-JtE">
                                             <rect key="frame" x="75" y="7" width="96.5" height="22"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@username - 06/19/2009" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uii-ag-3lQ">
-                                            <rect key="frame" x="175.5" y="12" width="124" height="12"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="@username - 06/19/2009" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uii-ag-3lQ">
+                                            <rect key="frame" x="176" y="13" width="191" height="12"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -217,8 +217,10 @@
                                     <outlet property="messageCountLabel" destination="5mt-fc-XUw" id="sHP-Ud-GAD"/>
                                     <outlet property="nameLabel" destination="S4g-60-JtE" id="RLy-5F-PXQ"/>
                                     <outlet property="profileImage" destination="e5B-IG-oIx" id="4YU-c8-59K"/>
+                                    <outlet property="replyCountLabel" destination="5mt-fc-XUw" id="92o-Gh-pdK"/>
                                     <outlet property="retweetCountLabel" destination="3c3-i6-c7X" id="Ikj-Ws-7Ui"/>
                                     <outlet property="retweetedImageView" destination="Ncw-wM-vug" id="Jz2-lh-bbW"/>
+                                    <outlet property="tweetTextLabel" destination="fzt-uq-omf" id="Y9b-4P-sYj"/>
                                     <outlet property="usernameDateLabel" destination="Uii-ag-3lQ" id="L0F-9m-ust"/>
                                 </connections>
                             </tableViewCell>

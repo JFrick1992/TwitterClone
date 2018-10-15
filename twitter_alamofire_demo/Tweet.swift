@@ -39,7 +39,7 @@ class Tweet {
         favorited = dictionary["favorited"] as? Bool
         retweetCount = dictionary["retweet_count"] as? Int
         retweeted = dictionary["retweeted"] as? Bool
-        
+      
 
         // initialize user
         let user = dictionary["user"] as! [String: Any]

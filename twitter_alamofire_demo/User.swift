@@ -16,7 +16,8 @@ class User {
     init(dictionary: [String: Any]) {
         name = dictionary["name"] as? String
         screenName = dictionary["screen_name"] as? String
-        if let profile: String = dictionary["profile_image_url_httpls"] as? String {
+        if let profile: String = dictionary["profile_image_url_https"] as? String {
+            print(profile)
             profilePicture = URL(string: profile)!
         }
         // Initialize any other properties
