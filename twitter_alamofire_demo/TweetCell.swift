@@ -10,47 +10,75 @@ import UIKit
 import AlamofireImage
 
 class TweetCell: UITableViewCell {
-    @IBOutlet weak var profileImage: UIImageView!
-   
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
-    @IBOutlet weak var retweetedImageView: UIImageView!
-    @IBOutlet weak var favoritedImageView: UIImageView!
-    @IBOutlet weak var favoriteCountLabel: UILabel!
-    @IBOutlet weak var retweetCountLabel: UILabel!
-    @IBOutlet weak var messageCountLabel: UILabel!
-    @IBOutlet weak var usernameDateLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var replyCountLabel: UILabel!
+    @IBOutlet weak var retweetCountLabel: UILabel!
+    @IBOutlet weak var favoriteCountLabel: UILabel!
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var favoritedButton: UIButton!
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    
     
     var tweet: Tweet? {
         didSet {
-            profileImage.af_setImage(withURL: (tweet?.user?.profilePicture)!)
-            nameLabel.text = tweet?.user?.name!
-            usernameDateLabel.text = (tweet?.user?.screenName)! + " - " + (tweet?.createdAtString)!
-            favoriteCountLabel.text = "\((tweet?.favoriteCount)!)"
             tweetTextLabel.text = tweet?.text!
-            retweetCountLabel.text = "\((tweet?.retweetCount)!)"
+            nameLabel.text = tweet?.user?.name!
+            nameLabel.sizeToFit()
+            usernameLabel.text = tweet?.user?.screenName!
+            dateLabel.text = tweet?.createdAtString!
             replyCountLabel.text = "0"
-            if (tweet?.retweeted)! {
-                retweetedImageView.image = #imageLiteral(resourceName: "retweet-icon-green.png")
-            } else {
-                retweetedImageView.image = #imageLiteral(resourceName: "retweet-icon.png")
-            }
+            favoriteCountLabel.text = "\((tweet?.favoriteCount)!)"
+            retweetCountLabel.text = "\((tweet?.retweetCount)!)"
             if (tweet?.favorited)! {
-                favoritedImageView.image = #imageLiteral(resourceName: "favor-icon-red.png")
+                favoritedButton.setImage(#imageLiteral(resourceName: "favor-icon-red.png"), for: .normal)
             } else {
-                favoritedImageView.image = #imageLiteral(resourceName: "favor-icon.png")
+                favoritedButton.setImage(#imageLiteral(resourceName: "favor-icon.png"), for: .normal)
             }
+            if (tweet?.retweeted)! {
+                retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon-green.png"), for: .normal)
+            } else {
+                retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon.png"), for: .normal)
+            }
+            
+        }
+
+    }
+
+    @IBAction func tappedFavorite(_ sender: Any) {
+        if favoritedButton.currentImage == #imageLiteral(resourceName: "favor-icon.png") {
+            favoritedButton.setImage(#imageLiteral(resourceName: "favor-icon-red.png"), for: .normal)
+        } else {
+            favoritedButton.setImage(#imageLiteral(resourceName: "favor-icon.png"), for: .normal)
         }
     }
+    @IBAction func tappedRetweet(_ sender: Any) {
+        if retweetButton.currentImage == #imageLiteral(resourceName: "retweet-icon.png") {
+            retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon-green.png"), for: .normal)
+        } else {
+            retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon.png"), for: .normal)
+
+        }
+    }
+    
+    
+    
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon.png"), for: .normal)
+        favoritedButton.setImage(#imageLiteral(resourceName: "favor-icon.png"), for: .normal)
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        self.backgroundColor = UIColor.white
         // Configure the view for the selected state
     }
 

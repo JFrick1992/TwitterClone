@@ -58,5 +58,5 @@ class TimelineViewController: UIViewController, UITableViewDataSource {
         return cell
     }
 
-  
+    
 }
