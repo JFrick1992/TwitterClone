@@ -24,6 +24,14 @@ class APIManager: SessionManager {
     
     static let callbackURLString = "alamoTwitter://"
     
+    
+    
+    enum TweetAction: String {
+        case favorite = "https://api.twitter.com/1.1/favorites/create.json"
+        case unfavorite = "https://api.twitter.com/1.1/favorites/destroy.json"
+        case retweet = "https://api.twitter.com/1.1/statuses/retweet/"
+        case unretweet = "https://api.twitter.com/1.1/statuses/unretweet/"
+    }
     // MARK: Twitter API methods
     func login(success: @escaping () -> (), failure: @escaping (Error?) -> ()) {
         
@@ -110,21 +118,29 @@ class APIManager: SessionManager {
         }
     }
     func logout() {
-        // 1. Clear current user
-        
-        
-        // TODO: 2. Deauthorize OAuth tokens
         clearCredentials()
-        // 3. Post logout notification
         NotificationCenter.default.post(name: NSNotification.Name("didLogout"), object: nil)
     }
-    // MARK: TODO: Favorite a Tweet
-    
-    // MARK: TODO: Un-Favorite a Tweet
-    
-    // MARK: TODO: Retweet
-    
-    // MARK: TODO: Un-Retweet
+
+    func performTweetAction(_ tweet: Tweet, _ action: TweetAction, completion: @escaping (Tweet?, Error?) -> ()) {
+        var urlString = ""
+        if action == .retweet || action == .unretweet {
+            urlString = "\(action.rawValue)\((tweet.id)!).json"
+            
+        } else {
+            urlString = action.rawValue
+        }
+        let parameters = ["id": tweet.id]
+        request(urlString, method: .post, parameters: parameters, encoding: URLEncoding.queryString).validate().responseJSON { (response) in
+            if response.result.isSuccess,
+                let tweetDictionary = response.result.value as? [String: Any] {
+                let tweet = Tweet(dictionary: tweetDictionary)
+                completion(tweet, nil)
+            } else {
+                completion(nil, response.result.error)
+            }
+        }
+    }
     
     // MARK: TODO: Compose Tweet
     

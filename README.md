@@ -14,7 +14,7 @@ The following **required** functionality is completed:
 - [X] Create Data Models for User and Tweet. (1pt)
 - [X] User can view last 20 tweets from their home timeline with the user profile picture, username, tweet text, and timestamp. (2pts)
 - [X] User can pull to refresh. (1pt)
-- [ ] User can tap the retweet and favorite buttons in a tweet cell to retweet and/or favorite a tweet. (2pts)
+- [X] User can tap the retweet and favorite buttons in a tweet cell to retweet and/or favorite a tweet. (2pts)
 - [X] Using AutoLayout, the Tweet cell should adjust it's layout for iPhone 7, Plus and SE device sizes as well as accommodate device rotation. (1pt)
 
 The following **stretch** features are implemented:
@@ -28,6 +28,7 @@ The following **stretch** features are implemented:
 The following **additional** features are implemented:
 
 - [ ] List anything else that you can get done to improve the app functionality!
+- [X] Created a TweetAction Enum in APIManager which an enum from there can be passed to a function to determine the action based on a raw string stored in the enum. This condenses the Favorite, Unfavorite, Retweet, and Unretweet into one single function.
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 

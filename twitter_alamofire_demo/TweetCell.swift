@@ -19,7 +19,7 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var favoritedButton: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
-    
+    @IBOutlet weak var profilePictureImageView: UIImageView!
     
     
     var tweet: Tweet? {
@@ -27,11 +27,12 @@ class TweetCell: UITableViewCell {
             tweetTextLabel.text = tweet?.text!
             nameLabel.text = tweet?.user?.name!
             nameLabel.sizeToFit()
-            usernameLabel.text = tweet?.user?.screenName!
+            usernameLabel.text = "@\((tweet?.user?.screenName)!)"
             dateLabel.text = tweet?.createdAtString!
             replyCountLabel.text = "0"
             favoriteCountLabel.text = "\((tweet?.favoriteCount)!)"
             retweetCountLabel.text = "\((tweet?.retweetCount)!)"
+            
             if (tweet?.favorited)! {
                 favoritedButton.setImage(#imageLiteral(resourceName: "favor-icon-red.png"), for: .normal)
             } else {
@@ -42,7 +43,7 @@ class TweetCell: UITableViewCell {
             } else {
                 retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon.png"), for: .normal)
             }
-            
+            profilePictureImageView.af_setImage(withURL: (tweet?.user?.profilePicture)!)
         }
 
     }
@@ -50,19 +51,48 @@ class TweetCell: UITableViewCell {
     @IBAction func tappedFavorite(_ sender: Any) {
         if favoritedButton.currentImage == #imageLiteral(resourceName: "favor-icon.png") {
             favoritedButton.setImage(#imageLiteral(resourceName: "favor-icon-red.png"), for: .normal)
+            tweet?.favoriteCount! = (tweet?.favoriteCount)! + 1
+            tweet?.favorited = true
+            performTweetAction(APIManager.TweetAction.favorite)
+            
         } else {
             favoritedButton.setImage(#imageLiteral(resourceName: "favor-icon.png"), for: .normal)
+            tweet?.favoriteCount! -= 1
+            tweet?.favorited = false
+            performTweetAction(APIManager.TweetAction.unfavorite)
         }
+        favoriteCountLabel.text = "\((tweet?.favoriteCount)!)"
     }
+
     @IBAction func tappedRetweet(_ sender: Any) {
         if retweetButton.currentImage == #imageLiteral(resourceName: "retweet-icon.png") {
             retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon-green.png"), for: .normal)
+            tweet?.retweetCount! = (tweet?.retweetCount)! + 1
+            tweet?.retweeted = true
+            performTweetAction(APIManager.TweetAction.retweet)
         } else {
             retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon.png"), for: .normal)
-
+            tweet?.retweetCount! -= 1
+            tweet?.retweeted = false
+            performTweetAction(APIManager.TweetAction.unretweet)
         }
+        retweetCountLabel.text = "\((tweet?.retweetCount)!)"
     }
     
+    /**
+     *Function for TweetCell to call the tweet action function in APIManager
+     *Uses tweet for the cell and passes an enum constant from APIManager.TweetActions
+     *to determine that action to take: Favorite, Unfavorite, Retweet and Unretweet
+     **/
+    func performTweetAction(_ action: APIManager.TweetAction) {
+        APIManager.shared.performTweetAction(tweet!, action) { (tweet: Tweet?, error: Error?) in
+            if let  error = error {
+                print("Error favoriting tweet: \(error.localizedDescription)")
+            } else if let tweet = tweet {
+                print("Successfully favorited the following Tweet: \n\(tweet.text!)")
+            }
+        }
+    }
     
     
     

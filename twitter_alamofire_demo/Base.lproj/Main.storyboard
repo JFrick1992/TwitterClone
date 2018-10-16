@@ -249,6 +249,7 @@
                                     <outlet property="favoriteCountLabel" destination="L3O-UA-BsZ" id="z6u-zW-Acf"/>
                                     <outlet property="favoritedButton" destination="HDN-0h-ltw" id="Jfb-xG-8lS"/>
                                     <outlet property="nameLabel" destination="KKa-LE-4Md" id="KHI-cO-fTs"/>
+                                    <outlet property="profilePictureImageView" destination="1et-EY-9Yk" id="zrN-al-IMN"/>
                                     <outlet property="replyCountLabel" destination="Y55-rf-srn" id="SnH-Ae-qVU"/>
                                     <outlet property="retweetButton" destination="JVx-QC-tsi" id="8gx-U0-wHJ"/>
                                     <outlet property="retweetCountLabel" destination="WvT-qy-4dD" id="WrR-Zy-KRs"/>

@@ -50,10 +50,17 @@ class TimelineViewController: UIViewController, UITableViewDataSource {
     @IBAction func didTapLogOut(_ sender: Any) {
         APIManager.shared.logout()
     }
+    func updateTweet(_ tag: Int, _ tweet: Tweet) {
+        tweets[tag] = tweet
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         if tweets.count > 0 {
             cell.tweet = tweets[indexPath.row]
+            cell.tag = indexPath.row
+            let bgv = UIView()
+            bgv.backgroundColor = UIColor.white
+            cell.selectedBackgroundView = bgv
         }
         return cell
     }
