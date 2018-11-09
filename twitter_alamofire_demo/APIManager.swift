@@ -15,8 +15,8 @@ import KeychainAccess
 class APIManager: SessionManager {
     
     // MARK: TODO: Add App Keys
-    static let consumerKey = ""
-    static let consumerSecret = ""
+    static let consumerKey = "ENkNecWfyKqHD1jTLKjUoaqed"
+    static let consumerSecret = "RncLLzqVYJ8FIQBtcmr8v8d25iwx6WVYkyNjl54cLw9F01KOzr"
 
     static let requestTokenURL = "https://api.twitter.com/oauth/request_token"
     static let authorizeURL = "https://api.twitter.com/oauth/authorize"
@@ -31,6 +31,8 @@ class APIManager: SessionManager {
         case unfavorite = "https://api.twitter.com/1.1/favorites/destroy.json"
         case retweet = "https://api.twitter.com/1.1/statuses/retweet/"
         case unretweet = "https://api.twitter.com/1.1/statuses/unretweet/"
+        case reply = "https://api.twitter.com/1.1/statuses/update.json"
+        case composeNew
     }
     // MARK: Twitter API methods
     func login(success: @escaping () -> (), failure: @escaping (Error?) -> ()) {
@@ -124,13 +126,15 @@ class APIManager: SessionManager {
 
     func performTweetAction(_ tweet: Tweet, _ action: TweetAction, completion: @escaping (Tweet?, Error?) -> ()) {
         var urlString = ""
+        var parameters = [String: Int?]()
         if action == .retweet || action == .unretweet {
             urlString = "\(action.rawValue)\((tweet.id)!).json"
             
-        } else {
+        }else {
+            parameters = ["id": tweet.id]
             urlString = action.rawValue
         }
-        let parameters = ["id": tweet.id]
+        
         request(urlString, method: .post, parameters: parameters, encoding: URLEncoding.queryString).validate().responseJSON { (response) in
             if response.result.isSuccess,
                 let tweetDictionary = response.result.value as? [String: Any] {
@@ -143,7 +147,22 @@ class APIManager: SessionManager {
     }
     
     // MARK: TODO: Compose Tweet
-    
+    func composeTweet(_ text: String, _ tweet: Tweet, _ action: TweetAction, completion: @escaping (Tweet?, Error?) -> ()) {
+        let urlString = "https://api.twitter.com/1.1/statuses/update.json"
+        var parameters = [String: Any]()
+        if(action == TweetAction.reply) {
+            parameters = ["status": text,"in_reply_to_status_id": tweet.id! ]
+        } else if (action == TweetAction.composeNew) {
+            
+        }
+        oauthManager.client.post(urlString, parameters: parameters, headers: nil, body: nil, success: { (response: OAuthSwiftResponse) in
+            let tweetDictionary = try! response.jsonObject() as! [String: Any]
+            let tweet = Tweet(dictionary: tweetDictionary)
+            completion(tweet, nil)
+        }) { (error: OAuthSwiftError) in
+            completion(nil, error.underlyingError)
+        }
+    }
     // MARK: TODO: Get User Timeline
     
     

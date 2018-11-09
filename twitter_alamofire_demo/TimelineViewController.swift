@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimelineViewController: UIViewController, UITableViewDataSource {
+class TimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
     @IBOutlet var tableView: UITableView!
     var tweets = [Tweet]()
     let refreshcontrol = UIRefreshControl()
@@ -16,6 +16,7 @@ class TimelineViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        tableView.delegate = self
         refreshcontrol.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
         tableView.insertSubview(refreshcontrol, at: 0)
         fecthTweets()
@@ -50,20 +51,25 @@ class TimelineViewController: UIViewController, UITableViewDataSource {
     @IBAction func didTapLogOut(_ sender: Any) {
         APIManager.shared.logout()
     }
-    func updateTweet(_ tag: Int, _ tweet: Tweet) {
-        tweets[tag] = tweet
-    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         if tweets.count > 0 {
             cell.tweet = tweets[indexPath.row]
             cell.tag = indexPath.row
-            let bgv = UIView()
-            bgv.backgroundColor = UIColor.white
-            cell.selectedBackgroundView = bgv
         }
         return cell
     }
-
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "tweetDetailSegue" {
+            let cell = sender as! TweetCell
+            let destination = segue.destination as! TweetDetailViewController
+            let indexPath = tableView.indexPath(for: cell)!
+            destination.tweet = tweets[indexPath.row]
+            cell.setSelected(false, animated: false)
+        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableView.reloadData()
+    }
 }
