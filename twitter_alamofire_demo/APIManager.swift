@@ -163,8 +163,17 @@ class APIManager: SessionManager {
             completion(nil, error.underlyingError)
         }
     }
-    // MARK: TODO: Get User Timeline
-    
+    func composeNewTweet(_ text: String, _ tweet: User, _ action: TweetAction, completion: @escaping (User?, Error?) -> ()) {
+        let urlString = "https://api.twitter.com/1.1/statuses/update.json"
+        let parameters = ["status": text]
+        oauthManager.client.post(urlString, parameters: parameters, headers: nil, body: nil, success: { (response: OAuthSwiftResponse) in
+            let tweetDictionary = try! response.jsonObject() as! [String: Any]
+            let tweet = User(dictionary: tweetDictionary)
+            completion(tweet, nil)
+        }) { (error: OAuthSwiftError) in
+            completion(nil, error.underlyingError)
+        }
+    }
     
     //--------------------------------------------------------------------------------//
     

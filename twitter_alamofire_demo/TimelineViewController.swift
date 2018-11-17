@@ -19,6 +19,7 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.delegate = self
         refreshcontrol.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
         tableView.insertSubview(refreshcontrol, at: 0)
+        //self.tableView.reloadData()
         fecthTweets()
         
     }
@@ -70,6 +71,6 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     override func viewWillAppear(_ animated: Bool) {
-        self.tableView.reloadData()
+        fecthTweets()
     }
 }

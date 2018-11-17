@@ -9,7 +9,7 @@
 import UIKit
 import AlamofireImage
 
-class TweetDetailViewController: UIViewController {
+class TweetDetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -24,6 +24,7 @@ class TweetDetailViewController: UIViewController {
     
     @IBOutlet weak var replyTextField: UITextView!
     
+    @IBOutlet weak var charCountLabel: UILabel!
     
     
 
@@ -31,8 +32,10 @@ class TweetDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setIntialTweetValues()
+        replyTextField.delegate = self
         replyTextField!.layer.borderWidth = 1
         replyTextField!.layer.borderColor = UIColor.lightGray.cgColor
+        charCountLabel.text = "0"
         // Do any additional setup after loading the view.
     }
 
@@ -121,7 +124,12 @@ class TweetDetailViewController: UIViewController {
             }
         }
     }
-    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let charLimit = 140
+        let newText = NSString(string: replyTextField.text!).replacingCharacters(in: range, with: text)
+        charCountLabel.text = "\(newText.count)"
+        return newText.count < charLimit
+    }
 
 }
 

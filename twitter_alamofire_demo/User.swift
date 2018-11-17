@@ -13,6 +13,9 @@ class User {
     var name: String?
     var screenName: String?
     var profilePicture: URL?
+    var followers_count: Int?
+    var friends_count: Int?
+    var statuses_count: Int?
     init(dictionary: [String: Any]) {
         name = dictionary["name"] as? String
         screenName = dictionary["screen_name"] as? String
@@ -21,5 +24,9 @@ class User {
             profilePicture = URL(string: profile)!
         }
         // Initialize any other properties
+        followers_count = dictionary["followers_count"] as? Int
+        friends_count = dictionary["friends_count"] as? Int
+        statuses_count = dictionary["statuses_count"] as? Int
+        
     }
 }
