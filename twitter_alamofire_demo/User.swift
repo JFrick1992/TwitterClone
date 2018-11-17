@@ -16,6 +16,7 @@ class User {
     var followers_count: Int?
     var friends_count: Int?
     var statuses_count: Int?
+    var description: String?
     init(dictionary: [String: Any]) {
         name = dictionary["name"] as? String
         screenName = dictionary["screen_name"] as? String
@@ -27,6 +28,7 @@ class User {
         followers_count = dictionary["followers_count"] as? Int
         friends_count = dictionary["friends_count"] as? Int
         statuses_count = dictionary["statuses_count"] as? Int
-        
+        description = dictionary["description"] as? String
+        //print(description)
     }
 }

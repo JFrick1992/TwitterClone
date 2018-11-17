@@ -12,6 +12,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var usernam: UILabel!
     @IBOutlet weak var screennameLabel: UILabel!
     
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var followingCountLabel: UILabel!
     @IBOutlet weak var followersCountLabel: UILabel!
@@ -26,6 +27,7 @@ class ProfileViewController: UIViewController {
                 self.followersCountLabel.text = "Followers: \(user.followers_count!)"
                 self.followingCountLabel.text = "Following: \(user.friends_count!)"
                 self.profileImageView.af_setImage(withURL: user.profilePicture!)
+                self.descriptionLabel.text = "Tagline\((user.description)!)"
             }
         }
 

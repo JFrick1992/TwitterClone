@@ -329,9 +329,16 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jgK-tF-2lp">
+                                <rect key="frame" x="166" y="381" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="jgK-tF-2lp" firstAttribute="top" secondItem="YxX-j3-y6G" secondAttribute="bottom" constant="20" id="2KD-iW-oOI"/>
                             <constraint firstItem="9wg-o6-XQY" firstAttribute="centerX" secondItem="rbJ-EW-mcK" secondAttribute="centerX" id="5Nm-8Z-z5h"/>
                             <constraint firstItem="9wg-o6-XQY" firstAttribute="top" secondItem="6f5-Tx-A6b" secondAttribute="bottom" constant="8" id="9R1-Xq-vWr"/>
                             <constraint firstItem="APS-Em-RkY" firstAttribute="centerX" secondItem="rbJ-EW-mcK" secondAttribute="centerX" id="AgO-xL-xYR"/>
@@ -341,12 +348,14 @@
                             <constraint firstItem="tLU-qh-6Rv" firstAttribute="top" secondItem="9wg-o6-XQY" secondAttribute="bottom" constant="8" id="Xyk-C1-rUX"/>
                             <constraint firstItem="YxX-j3-y6G" firstAttribute="centerX" secondItem="rbJ-EW-mcK" secondAttribute="centerX" id="YG0-8l-OJ7"/>
                             <constraint firstItem="YxX-j3-y6G" firstAttribute="top" secondItem="E9M-7V-wox" secondAttribute="bottom" constant="8" id="YQ8-Mv-Qr9"/>
+                            <constraint firstItem="YxX-j3-y6G" firstAttribute="centerX" secondItem="rbJ-EW-mcK" secondAttribute="centerX" id="bwQ-JD-VbB"/>
                             <constraint firstItem="6f5-Tx-A6b" firstAttribute="centerX" secondItem="rbJ-EW-mcK" secondAttribute="centerX" id="fEf-jm-yQ9"/>
                             <constraint firstItem="YxX-j3-y6G" firstAttribute="top" secondItem="E9M-7V-wox" secondAttribute="bottom" constant="8" id="hHF-Fj-nzs"/>
                             <constraint firstItem="E9M-7V-wox" firstAttribute="top" secondItem="APS-Em-RkY" secondAttribute="bottom" constant="8" id="he5-8u-1g3"/>
                             <constraint firstItem="6f5-Tx-A6b" firstAttribute="top" secondItem="AKW-ov-Ceo" secondAttribute="bottom" constant="16" id="isu-rY-rtc"/>
                             <constraint firstItem="E9M-7V-wox" firstAttribute="top" secondItem="APS-Em-RkY" secondAttribute="bottom" constant="8" id="lAm-pA-Sq5"/>
                             <constraint firstItem="tLU-qh-6Rv" firstAttribute="centerX" secondItem="rbJ-EW-mcK" secondAttribute="centerX" id="nPg-m1-YKA"/>
+                            <constraint firstItem="jgK-tF-2lp" firstAttribute="centerX" secondItem="rbJ-EW-mcK" secondAttribute="centerX" id="ooR-xZ-rVL"/>
                             <constraint firstItem="E9M-7V-wox" firstAttribute="centerX" secondItem="rbJ-EW-mcK" secondAttribute="centerX" id="tDj-6a-iao"/>
                             <constraint firstItem="APS-Em-RkY" firstAttribute="top" secondItem="tLU-qh-6Rv" secondAttribute="bottom" constant="8" id="yyb-ma-6se"/>
                         </constraints>
@@ -365,6 +374,7 @@
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="descriptionLabel" destination="jgK-tF-2lp" id="7Uv-Fn-meq"/>
                         <outlet property="followersCountLabel" destination="E9M-7V-wox" id="fhe-4s-UMT"/>
                         <outlet property="followingCountLabel" destination="YxX-j3-y6G" id="k4e-Eq-lye"/>
                         <outlet property="profileImageView" destination="6f5-Tx-A6b" id="6pD-lD-ciJ"/>
@@ -654,6 +664,7 @@
                         <outlet property="retweetCountLabel" destination="FZb-3Z-feL" id="kiq-Em-LsH"/>
                         <outlet property="tweetTextLabel" destination="1R3-4k-FdL" id="htP-nM-663"/>
                         <outlet property="usernameLabel" destination="MaW-m1-dwS" id="nfg-N5-w8C"/>
+                        <segue destination="Pux-93-5GE" kind="presentation" identifier="return" id="wS6-FE-U6t"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Olx-1H-DDR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -725,7 +736,7 @@
         <image name="retweet-icon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gKl-zu-ueE"/>
-        <segue reference="Gqr-2h-hno"/>
+        <segue reference="wS6-FE-U6t"/>
+        <segue reference="44n-Zn-zUB"/>
     </inferredMetricsTieBreakers>
 </document>
