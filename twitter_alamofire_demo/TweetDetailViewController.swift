@@ -102,8 +102,8 @@ class TweetDetailViewController: UIViewController, UITextViewDelegate {
     
     
     @IBAction func tappedReplyToTweet(_ sender: Any) {
-        let text = replyTextField.text
-        APIManager.shared.composeTweet(text!, tweet, APIManager.TweetAction.reply) { (tweet, error) in
+        let text = "\((tweet.user?.screenName)!) \((replyTextField.text)!)"
+        APIManager.shared.composeTweet(text, tweet, APIManager.TweetAction.reply) { (tweet, error) in
             if let error = error {
                 print("Error composing Tweet: \(error.localizedDescription)")
             } else if tweet != nil {
